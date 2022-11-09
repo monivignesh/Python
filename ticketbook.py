@@ -1,5 +1,11 @@
-#Main Code
-#sam added
+'''
+
+                            Online Python Compiler.
+                Code, Compile, Run and Debug python program online.
+Write your code in this editor and press "Run" button to execute it.
+
+'''
+
 def create_arr(row,column):
     arr=[]
     for i in range(row):
@@ -19,24 +25,37 @@ def availability(seat,row,column):
     if seat%column == 0:
         return (r-2,column-1)
     return (r-1,c-1)
-
-row,column = map(int,input("Enter row and column size ").split())
+fl=1
+while(fl):
+    row,column = map(int,input("Enter row and column size ").split())
+    if row==0 or column==0:
+        print("Invalid")
+       # row,column = map(int,input("Enter row and column size ").split())
+    else:
+        fl=0
+    
 seat_avail = create_arr(row,column)
 flag=1
-
+xo=1
 while(flag):
-    no_seat = int(input("Enter number of seats to book: "))
-    while(no_seat):
-        disp()
-        seat = int(input("Enter seat number: "))
-        r,c = availability(seat,row,column)
-        print(r,c)
-        if seat_avail[r][c] != 0 and (r != -1) and (c != -1):
-            print("Booked",seat)
-            seat_avail[r][c] = 0
-            no_seat -= 1
+    #no_seat = int(input("Enter number of seats to book: ")) 
+    while(xo):
+        no_seat = int(input("Enter number of seats to book: ")) 
+        if((no_seat<=(row*column)) and (no_seat!=0) and no_seat>0):
+            while(no_seat):
+                disp()
+                seat = int(input("Enter seat number: "))
+                r,c = availability(seat,row,column)
+                print(r,c)
+                if seat_avail[r][c] != 0 and (r != -1) and (c != -1):
+                    print("Booked",seat)
+                    seat_avail[r][c] = 0
+                    no_seat -= 1
+                else:
+                    print("Already booked, choose another seat or Enter valid seat")
+            xo=0
         else:
-            print("Already booked, choose another seat or Enter valid seat")
+            print("Enter valid seat no")
     f = int(input("1.Continue Booking, 0.Exit "))
     if not f:
         flag = 0
